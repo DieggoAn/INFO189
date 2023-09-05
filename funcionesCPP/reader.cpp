@@ -181,7 +181,7 @@ bool shouldInclude(char c, const std::string& charactersToInclude, const std::st
     return false; // Default: Exclude the character
 }
 
-void countWordsAndSave(const std::string& fileName, const std::string& bookPath, const std::string& charactersToInclude,const std::string& charactersToExclude) {
+void countWordsAndSave(const std::string& fileName, const std::string& bookPath, const std::string& charactersToInclude, const std::string& charactersToExclude) {
     std::ifstream bookFile(bookPath);
     if (!bookFile.is_open()) {
         std::cerr << "No se pudo encontrar el archivo: " << bookPath << std::endl;
@@ -194,16 +194,36 @@ void countWordsAndSave(const std::string& fileName, const std::string& bookPath,
     std::string word;
     while (bookFile >> word) {
         // Remove punctuation and convert to lowercase
-        for (char& c : word) {
-            if (shouldInclude(c, charactersToInclude,charactersToExclude)) {
+        std::string cleanedWord; // Create a new string to store the cleaned word
+        bool shouldAddWord = true; // Flag to control whether to add the word to the map
+
+        for (char c : word) {
+            if (shouldInclude(c, charactersToInclude, charactersToExclude)) {
                 c = std::tolower(c);
+                cleanedWord += c; // Append valid characters to the cleaned word
+            } else {
+                shouldAddWord = false; // Set the flag to false if the character should be excluded
+                break; // Stop processing the word
             }
         }
-        // Increment word count
-        wordCount[word]++;
+
+        // Check if we should add the word to the map
+        if (shouldAddWord) {
+            // Increment word count
+            wordCount[cleanedWord]++;
+        }
     }
 
     bookFile.close();
+
+    // Create a vector of pairs for sorting
+    std::vector<std::pair<std::string, int>> sortedWordCount(wordCount.begin(), wordCount.end());
+
+    // Sort the vector in descending order based on word counts
+    std::sort(sortedWordCount.begin(), sortedWordCount.end(),
+              [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+                  return a.second > b.second;
+              });
 
     // Create and open the output file
     std::ofstream outFile(fileName);
@@ -212,8 +232,8 @@ void countWordsAndSave(const std::string& fileName, const std::string& bookPath,
         return;
     }
 
-    // Write word counts to the output file
-    for (const auto& pair : wordCount) {
+    // Write word counts to the output file in descending order
+    for (const auto& pair : sortedWordCount) {
         outFile << pair.first << ": " << pair.second << std::endl;
     }
 
