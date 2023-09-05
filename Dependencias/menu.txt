@@ -1,0 +1,9 @@
+0) Salir. <admin,userRookie,userGeneral>
+1) Realizar sumatoria del vector. <admin,userRookie,userGeneral>
+2) Realizar promedio del vector. <admin,userGeneral>
+3) Realizar moda del vector. <admin,userGeneral>
+4) Contar elementos del vector. <admin,userRookie,userGeneral>
+5) Crear Archivo. <admin>
+6) Agregar texto a archivo. <admin>
+7) Contar palabras. <admin>
+8) indefinido. 

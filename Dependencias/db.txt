@@ -1,0 +1,2 @@
+Diego.admin,Andres.userGeneral,Felipe.userRookie,Claudio.userGeneral,Cristian.userGeneral,Francisco.userRookie,Cintia.userRookie,Claudia.userGeneral,Andrea.userGeneral,Rosa.admin,Fernanda.userRookie,Melissa.userRookie
+
