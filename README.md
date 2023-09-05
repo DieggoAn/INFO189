@@ -54,11 +54,11 @@ y cada funcion esta separada por un "\n", por ejemplo los datos de una funcion s
 ```
 Donde **0** es el Numero identificador de la funcion, **Salir** es el nombre de la funcion y los usuarios que pueden usar esta funcion son **admin,userGeneral,userRookie**
 
-### Nivel de acceso
+## Nivel de acceso
 
 El nivel de acceso de un usuario refleja la cantidad de funciones a las cual este usuario tiene permisos para utilizar, en el archivo ***menu.txt*** a la derecha de cada funcion estan nombrados los tipos de usuario con acceso a la funcion. Estos son los permisos que tiene cada nivel de usuario.
 
-## Admin
+### Admin
 ```
 0) Salir. 
 1) Realizar sumatoria del vector. 
@@ -69,7 +69,7 @@ El nivel de acceso de un usuario refleja la cantidad de funciones a las cual est
 6) Agregar texto a archivo. 
 7) Contar palabras. 
 ```
-## userGeneral
+### userGeneral
 ```
 0) Salir. 
 1) Realizar sumatoria del vector. 
@@ -78,7 +78,7 @@ El nivel de acceso de un usuario refleja la cantidad de funciones a las cual est
 4) Contar elementos del vector. 
 ```
 
-## userRookie
+### userRookie
 ```
 0) Salir. 
 1) Realizar sumatoria del vector. 
