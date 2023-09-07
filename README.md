@@ -33,7 +33,7 @@ Para ingresar un vector este debe esta encerrado en comillas " " y cada numero d
 Una entrada completa para iniciar el programa se ve de esta forma :
 
 ```
-./myprogram -n Diego -v "1;2;3;4;5;6" -f Test -f "Hello World" -i "Dependencias/lotr.txt" -o "Dependencias/conteo"
+./myprogram -n Diego -v "1;2;3;4;5;6" -f Carpeta/Test -f "Hello World" -i "Dependencias/lotr.txt" -o "Dependencias/conteo"
 ```
 
 ## Explicacion base de datos
