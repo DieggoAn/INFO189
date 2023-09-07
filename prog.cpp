@@ -16,16 +16,13 @@ int main(int argc, char* argv[]) {
     std::string fileName = "";
     std::string text = "";
     std::string book = "";
-    std::string wordCounter = ""; // Specify characters to ignore
-
-
+    std::string wordCounter = "";
 
     //funcion getopt que parsea los datos ingresados
     while ((option = getopt(argc, argv, "n:v:f:t:i:o:")) != -1) {
         switch (option) {
             case 'n':
                 name = optarg;
-                //std::cout << filePath << std::endl;
                 if (fileReader(findPath("Dependencias/paths.txt","DB_PATH"),name) == false){ 
                     return 1;
                 }
@@ -82,7 +79,6 @@ int main(int argc, char* argv[]) {
         std::cin.get();
         system("clear");
     }
-    //delPath("Dependencias/paths.txt");
     return 0;
 
 }

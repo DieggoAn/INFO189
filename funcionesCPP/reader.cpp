@@ -1,9 +1,8 @@
 #include "../funcionesH/reader.h"
 
 bool fileReader(const std::string& filename, const std::string& keyword) {
-    // Open the file
-    std::ifstream inputFile(filename);
 
+    std::ifstream inputFile(filename);
     // Check if the file is open
     if (!inputFile.is_open()) {
         std::cerr << "No se pudo abrir el archivo." << std::endl;
@@ -13,7 +12,6 @@ bool fileReader(const std::string& filename, const std::string& keyword) {
      while (std::getline(inputFile, line, ',')) {
         std::istringstream ss(line);
         std::string name;
-
         // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.')) {
             if (name == keyword) {
@@ -23,14 +21,13 @@ bool fileReader(const std::string& filename, const std::string& keyword) {
         }
     }
 
-    // Close the file
     inputFile.close();
     std::cout << "No se encontro el nombre en la base de datos." << std::endl;
     return false;
-    };
+};
     
 std::string getName(const std::string& filename, const std::string& keyword){
-// Open the file
+
     std::ifstream inputFile(filename);
     std::string line;
     
@@ -38,23 +35,20 @@ std::string getName(const std::string& filename, const std::string& keyword){
         std::istringstream ss(line);
         std::string name;
 
-        // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.')) {
             if (name == keyword) {
                 inputFile.close();
                 return keyword;
-            }
+                }
             }
         }
         inputFile.close();
         std::cout << "No se pudo encontrar el nombrse en la base de datos " << std::endl;
         return 0;
-
-
 }
 
 std::string getAccessLevel(const std::string& filename, const std::string& keyword){
-    // Open the file
+
     std::ifstream inputFile(filename);
     std::string line;
     
@@ -63,7 +57,6 @@ std::string getAccessLevel(const std::string& filename, const std::string& keywo
         std::string name;
         std::string accessLevel;
 
-        // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.') && (ss >> accessLevel)) {
             if (name == keyword) {
                 inputFile.close();
@@ -74,7 +67,6 @@ std::string getAccessLevel(const std::string& filename, const std::string& keywo
         inputFile.close();
         std::cout << "No se pudo encontrar el nombre en la base de datos " << std::endl;
         return "";
-
 }
 
 int deployMenu(const std::string& filename, const std::string& name, const std::string& accessLevel) {
@@ -122,7 +114,6 @@ bool createNewTxtFile(const std::string& filePath) {
         return false;
     }
 
-    // Close the file
     file.close();
     return true;
 }
@@ -167,7 +158,6 @@ std::string findPath(const std::string& filename, const std::string& keyword) {
             }
         }
     }
-
     // Return an empty string if the keyword was not found in the file
     return "";
 }
@@ -181,7 +171,7 @@ bool shouldInclude(char c, const std::string& charactersToInclude) {
         }
     }
 
-    return false; // Default: Exclude the character
+    return false;
 }
 
 void countWordsAndSave(const std::string& fileName, const std::string& bookPath, const std::string& charactersToInclude) {
@@ -190,7 +180,6 @@ void countWordsAndSave(const std::string& fileName, const std::string& bookPath,
         std::cerr << "No se pudo encontrar el archivo: " << bookPath << std::endl;
         return;
     }
-
     // Create a map to store word counts
     std::map<std::string, int> wordCount;
 
@@ -206,13 +195,11 @@ void countWordsAndSave(const std::string& fileName, const std::string& bookPath,
                 cleanedWord += c; // Append valid characters to the cleaned word
             } else {
                 shouldAddWord = false; // Set the flag to false if the character should be excluded
-                break; // Stop processing the word
+                break; 
             }
         }
-
         // Check if we should add the word to the map
         if (shouldAddWord) {
-            // Increment word count
             wordCount[cleanedWord]++;
         }
     }
