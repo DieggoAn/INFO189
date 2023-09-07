@@ -8,6 +8,4 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
 
 bool hasAccess(int number, const std::string& accessLevel, const std::string& filename);
 
-bool accessManager(int option, const std::string& accessLevel);
-
 #endif //CASOS_H

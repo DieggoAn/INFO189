@@ -6,7 +6,7 @@ bool fileReader(const std::string& filename, const std::string& keyword) {
 
     // Check if the file is open
     if (!inputFile.is_open()) {
-        std::cerr << "Failed to opppen the file." << std::endl;
+        std::cerr << "No se pudo abrir el archivo." << std::endl;
         return false;
     }
     std::string line;
@@ -25,7 +25,7 @@ bool fileReader(const std::string& filename, const std::string& keyword) {
 
     // Close the file
     inputFile.close();
-    std::cout << "Cannot find name in database" << std::endl;
+    std::cout << "No se encontro el nombre en la base de datos." << std::endl;
     return false;
     };
     
@@ -47,7 +47,7 @@ std::string getName(const std::string& filename, const std::string& keyword){
             }
         }
         inputFile.close();
-        std::cout << "No se pudo encontrar el nombree en la base de datos " << std::endl;
+        std::cout << "No se pudo encontrar el nombrse en la base de datos " << std::endl;
         return 0;
 
 
@@ -103,24 +103,34 @@ int deployMenu(const std::string& filename, const std::string& name, const std::
     return 0;
 }
 
-void createNewTxtFile(const std::string& filename) {
+bool createNewTxtFile(const std::string& filePath) {
+    // Extract the directory path from the file path
+    std::string directory = filePath.substr(0, filePath.find_last_of("/\\"));
 
+    // Create the directory if it doesn't exist
+    if (!std::filesystem::exists(directory)) {
+        if (!std::filesystem::create_directories(directory)) {
+            std::cerr << "Error creating directory: " << directory << std::endl;
+            return false;
+        }
+    }
 
-    // Construct the full path to the new file
-    std::string filePath = "newFiles/" + filename + ".txt";
-    // Create and open the new file
-    std::ofstream outputFile(filePath);
-    if (outputFile.is_open()) {
-        // File created successfully
-    } 
+    // Create and open the file
+    std::ofstream file(filePath);
+    if (!file.is_open()) {
+        std::cerr << "Error creating file: " << filePath << std::endl;
+        return false;
+    }
+
+    // Close the file
+    file.close();
+    return true;
 }
 
-bool searchFileInNewFiles(const std::string& filename) {
-    // Construct the full path to the file in the "newFiles" folder
-    std::string filePath = "newFiles/" + filename + ".txt";
 
+bool searchFileInNewFiles(const std::string& filename) {
     // Check if the file exists
-    if (std::filesystem::exists(filePath)) {
+    if (std::filesystem::exists(filename)) {
         return true;
     } else {
         return false;
@@ -129,7 +139,7 @@ bool searchFileInNewFiles(const std::string& filename) {
 
 void appendToFile(const std::string& filename, const std::string& content) {
     std::ofstream outputFile;
-    std::string fullPath =  "newFiles/" + filename + ".txt";
+    std::string fullPath =  filename;
     outputFile.open(fullPath, std::ios::app); // Open the file in append mode
 
     if (outputFile.is_open()) {

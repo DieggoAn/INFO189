@@ -20,7 +20,7 @@ std::string getName(const std::string& filename, const std::string& keyword);
 
 int deployMenu(const std::string& filename, const std::string& name, const std::string& accessLevel);
 
-void createNewTxtFile(const std::string& filename); 
+bool createNewTxtFile(const std::string& filePath); 
 
 bool searchFileInNewFiles(const std::string& filename);
 
