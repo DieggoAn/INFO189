@@ -45,15 +45,16 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 7:
-            {
+            if (searchFileInNewFiles(fileName)==false){
                 std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
-                std::string charactersToExclude = " !@####$%^&*()_-+=~`|\\/{}[]:;\"'<>,.?1234567890";
                 if (std::filesystem::exists(libro)){
                     std::cout << "Contando palabras... "<<std::endl;
-                    countWordsAndSave(wordCounter,libro,charactersToInclude,charactersToExclude);
+                    countWordsAndSave(wordCounter,libro,charactersToInclude);
                     std::cout << "Cuenta terminada." <<std::endl;
                 }
-            }
+            }else{
+                std::cout<< "El archivo ya existe..."<<std::endl;
+                }
             break;
         // Add more cases for other numbers
         default:

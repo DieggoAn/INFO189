@@ -173,14 +173,7 @@ std::string findPath(const std::string& filename, const std::string& keyword) {
 }
 
 // Function to check if a character should be included
-bool shouldInclude(char c, const std::string& charactersToInclude, const std::string& charactersToExclude) {
-    // Check if the character is in the list of characters to exclude
-    for (char excludeChar : charactersToExclude) {
-        if (c == excludeChar) {
-            return false; // Exclude the character
-        }
-    }
-
+bool shouldInclude(char c, const std::string& charactersToInclude) {
     // Check if the character is in the list of characters to include
     for (char includeChar : charactersToInclude) {
         if (c == includeChar) {
@@ -191,7 +184,7 @@ bool shouldInclude(char c, const std::string& charactersToInclude, const std::st
     return false; // Default: Exclude the character
 }
 
-void countWordsAndSave(const std::string& fileName, const std::string& bookPath, const std::string& charactersToInclude, const std::string& charactersToExclude) {
+void countWordsAndSave(const std::string& fileName, const std::string& bookPath, const std::string& charactersToInclude) {
     std::ifstream bookFile(bookPath);
     if (!bookFile.is_open()) {
         std::cerr << "No se pudo encontrar el archivo: " << bookPath << std::endl;
@@ -208,7 +201,7 @@ void countWordsAndSave(const std::string& fileName, const std::string& bookPath,
         bool shouldAddWord = true; // Flag to control whether to add the word to the map
 
         for (char c : word) {
-            if (shouldInclude(c, charactersToInclude, charactersToExclude)) {
+            if (shouldInclude(c, charactersToInclude)) {
                 c = std::tolower(c);
                 cleanedWord += c; // Append valid characters to the cleaned word
             } else {
