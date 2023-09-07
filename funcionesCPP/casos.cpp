@@ -33,7 +33,7 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 6:
-            if (searchFileInNewFiles(fileName) == true){
+            if (searchFileInNewFiles(fileName)){
                 if(text != ""){
                     appendToFile(fileName,text);
                     std::cout << "Se ha agregado texto al archivo..." << std::endl;
@@ -45,15 +45,16 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 7:
-            {
+            if (searchFileInNewFiles(fileName)==false){
                 std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
-                std::string charactersToExclude = " !@####$%^&*()_-+=~`|\\/{}[]:;\"'<>,.?1234567890";
                 if (std::filesystem::exists(libro)){
-                    std::cout << "contando palabras... "<<std::endl;
-                    countWordsAndSave(wordCounter,libro,charactersToInclude,charactersToExclude);
-                    std::cout << "contacion exitosa" <<std::endl;
+                    std::cout << "Contando palabras... "<<std::endl;
+                    countWordsAndSave(wordCounter,libro,charactersToInclude);
+                    std::cout << "Cuenta terminada." <<std::endl;
                 }
-            }
+            }else{
+                std::cout<< "El archivo ya existe..."<<std::endl;
+                }
             break;
         // Add more cases for other numbers
         default:
@@ -68,7 +69,7 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
     std::ifstream file(filename);
     
     if (!file.is_open()) {
-        std::cerr << "Error opening file: " << filename << std::endl;
+        std::cerr << "No se pudo abrir el archivo: " << filename << std::endl;
         return false;  // Return false to indicate an error
     }
 
@@ -90,13 +91,4 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
     std::cout<<"Funcion no se encuentra implementada."<<std::endl;
     file.close();  // Close the file
     return false;  // Return false
-}
-
-bool accessManager(int option, const std::string& accessLevel){
-    if (hasAccess(1,"hola","nada")){
-        return true;
-    }else{
-        std::cout << "Acceso denegado por falta de permisos !" << std::endl;
-        return false;
-    }
 }
