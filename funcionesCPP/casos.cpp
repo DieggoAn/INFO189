@@ -67,10 +67,9 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
 
 bool hasAccess(int number, const std::string& accessLevel, const std::string& filename) {
     std::ifstream file(filename);
-    
     if (!file.is_open()) {
         std::cerr << "No se pudo abrir el archivo: " << filename << std::endl;
-        return false;  // Return false to indicate an error
+        return false;  
     }
 
     std::string line;
@@ -79,7 +78,7 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
         if (line.find(std::to_string(number)) == 0) {
             // Check if the name is present within the line
             if (line.find(accessLevel) != std::string::npos) {
-                file.close();  // Close the file
+                file.close();  
                 return true;   // Name found, return true
             }else{
                 std::cout<<"No tiene permisos para usar esta funcion."<<std::endl;
@@ -89,6 +88,6 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
     }
     // Name not found within the specified number's line
     std::cout<<"Funcion no se encuentra implementada."<<std::endl;
-    file.close();  // Close the file
-    return false;  // Return false
+    file.close();
+    return false;  
 }
