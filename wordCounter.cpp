@@ -11,15 +11,16 @@
 #include <condition_variable>
 #include <unistd.h> // Include for getpid()
 
-std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_IN) {
+std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_IN, std::string& extension) {
     std::vector<std::string> fileNames;
-    std::cout<<PATH_FILES_IN<<std::endl;
+    std::cout << PATH_FILES_IN << std::endl;
     try {
         // Iterate over the entries in the folder
         for (const auto& entry : std::filesystem::directory_iterator(PATH_FILES_IN)) {
-            // Check if the entry is a regular file
-            if (entry.is_regular_file()) {
-                fileNames.push_back(entry.path().filename().string());
+            std::string fileName = entry.path().filename().string();
+            std::string fileExtension = fileName.substr(fileName.length() - 3);
+            if (entry.is_regular_file() && fileExtension == extension) {
+                fileNames.push_back(fileName);
             }
         }
     } catch (const std::filesystem::filesystem_error& e) {
@@ -28,6 +29,7 @@ std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_IN) {
 
     return fileNames;
 }
+
 
 bool shouldInclude(char c, const std::string& charactersToInclude) {
     // Check if the character is in the list of characters to include
@@ -112,7 +114,7 @@ int main(int argc, char* argv[]) {
     std::string maxThreads = argv[4];
 
     std::cout << extension << " " << pathIn << " " << pathOut << " " << maxThreads << std::endl;
-    std::vector<std::string> files = getFilesInFolder(pathIn);
+    std::vector<std::string> files = getFilesInFolder(pathIn, extension);
     std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
 
     if (!files.empty()) {
