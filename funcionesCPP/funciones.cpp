@@ -47,13 +47,15 @@ void cerrarPrograma(){
     exit(0);
 }
 
-void executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4) {
+bool executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4) {
     std::string command = "./wordCounter " + param1 + " " + param2 + " " + param3 + " " + param4;
     int exitCode = std::system(command.c_str());
-    
+    bool success = false;
     if (exitCode == 0) {
         std::cout << "Se termino la cuenta de palabras." << std::endl;
+        success = true;
     } else {
         std::cerr << "Error al contar palabras." << std::endl;
     }
+    return success;
 }

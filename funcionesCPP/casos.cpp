@@ -2,6 +2,10 @@
 #include "../funcionesH/funciones.h"
 #include "../funcionesH/reader.h"
 
+
+bool canIndex = false;
+
+
 void caseManager(int option, const std::string& name, const std::vector<int>& vec,const std::string& fileName,const std::string& text, const std::string& libro, const std::string& wordCounter){
 
     switch (option) {
@@ -45,7 +49,14 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 7:
-            executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
+            canIndex = executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
+            break;
+        case 8:
+            if (canIndex == 1){
+                std::cout << "weena funcion todo perfecto"<<std::endl;
+            }else{
+                std::cout << "maaal anda roando en el cielo" <<std::endl;
+            }
             break;
         // Add more cases for other numbers
         default:

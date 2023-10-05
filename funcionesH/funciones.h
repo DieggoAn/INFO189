@@ -18,6 +18,6 @@ int calculateVectorLength(const std::vector<int>& vec);
 
 void cerrarPrograma();
 
-void executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4);
+bool executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4);
 
 #endif // FUNCIONES_H
