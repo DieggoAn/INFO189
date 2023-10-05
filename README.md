@@ -8,8 +8,14 @@ Esta aplicacion se desarrollo en un ambiente Linux, y todas las dependencias de 
 
 ## Comando para compilar
 
-Para compilar en Linux, solo debe abrir una terminal y ubicarse en la carpeta donde se encuentra el programa, luego en la terminal debe escribir ***make*** para compilar, si se quiere modificar el codigo, debe hacer ***make clean*** para eliminar el programa actual, luego hacer ***make*** para crearlo con los nuevos cambios.
-Al compilarlo con ***make*** se crea un ejecutable llamado ***myprogram***
+Para compilar en Linux, abrir una terminal y ubicarse en la carpeta donde se encuentra el programa, luego en la terminal debe ejecutar los siguientes comandos 
+
+```
+make
+make -f Makefile_wordCounter
+
+```
+ Despues de ejecutar los comandos ***make*** y ***make -f Makefile_wordCounter*** se crearan los ejecutables, ***myprogram*** y ***wordCounter***
 
 ## Comando para ejecutar
 
