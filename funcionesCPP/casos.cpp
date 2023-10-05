@@ -33,7 +33,7 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 6:
-            if (searchFileInNewFiles(fileName)){
+            if (searchFileInNewFiles(fileName) == true){
                 if(text != ""){
                     appendToFile(fileName,text);
                     std::cout << "Se ha agregado texto al archivo..." << std::endl;
@@ -45,16 +45,7 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 7:
-            if (searchFileInNewFiles(fileName)==false){
-                std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
-                if (std::filesystem::exists(libro)){
-                    std::cout << "Contando palabras... "<<std::endl;
-                    countWordsAndSave(wordCounter,libro,charactersToInclude);
-                    std::cout << "Cuenta terminada." <<std::endl;
-                }
-            }else{
-                std::cout<< "El archivo ya existe..."<<std::endl;
-                }
+            executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
             break;
         // Add more cases for other numbers
         default:
@@ -67,9 +58,10 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
 
 bool hasAccess(int number, const std::string& accessLevel, const std::string& filename) {
     std::ifstream file(filename);
+    
     if (!file.is_open()) {
-        std::cerr << "No se pudo abrir el archivo: " << filename << std::endl;
-        return false;  
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return false;  // Return false to indicate an error
     }
 
     std::string line;
@@ -78,7 +70,7 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
         if (line.find(std::to_string(number)) == 0) {
             // Check if the name is present within the line
             if (line.find(accessLevel) != std::string::npos) {
-                file.close();  
+                file.close();  // Close the file
                 return true;   // Name found, return true
             }else{
                 std::cout<<"No tiene permisos para usar esta funcion."<<std::endl;
@@ -88,6 +80,15 @@ bool hasAccess(int number, const std::string& accessLevel, const std::string& fi
     }
     // Name not found within the specified number's line
     std::cout<<"Funcion no se encuentra implementada."<<std::endl;
-    file.close();
-    return false;  
+    file.close();  // Close the file
+    return false;  // Return false
+}
+
+bool accessManager(int option, const std::string& accessLevel){
+    if (hasAccess(1,"hola","nada")){
+        return true;
+    }else{
+        std::cout << "Acceso denegado por falta de permisos !" << std::endl;
+        return false;
+    }
 }

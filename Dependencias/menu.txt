@@ -6,4 +6,6 @@
 5) Crear Archivo. <admin>
 6) Agregar texto a archivo. <admin>
 7) Contar palabras. <admin>
-8) indefinido. 
+8) Preparar datos para indice invertido. <admin>
+9) Crear indice invertido. <admin>
+10) Indefinido. 
