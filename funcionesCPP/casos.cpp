@@ -53,7 +53,7 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             break;
         case 8:
             if (canIndex == 1){
-                std::cout << "weena funcion todo perfecto"<<std::endl;
+                executeInvertedIndex(getenv("PATH_FILES_OUT"), getenv("INVERTED_INDEX_FILE"));
             }else{
                 std::cout << "maaal anda roando en el cielo" <<std::endl;
             }

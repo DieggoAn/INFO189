@@ -20,4 +20,6 @@ void cerrarPrograma();
 
 bool executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4);
 
+void executeInvertedIndex(const std::string& param1, const std::string& param2);
+
 #endif // FUNCIONES_H

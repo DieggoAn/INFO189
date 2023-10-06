@@ -92,7 +92,7 @@ void countWordsAndSave(const std::string& outputFolder, const std::string& bookP
 
     // Write word counts to the output file in descending order
     for (const auto& pair : sortedWordCount) {
-        outFile << pair.first << ": " << pair.second << std::endl;
+        outFile << pair.first << ", " << pair.second << std::endl;
     }
 
     std::thread::id threadID = std::this_thread::get_id();
