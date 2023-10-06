@@ -49,9 +49,21 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }
             break;
         case 7:
-            canIndex = executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
+            if (searchFileInNewFiles(fileName)==false){
+                std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
+                if (std::filesystem::exists(libro)){
+                    std::cout << "Contando palabras... "<<std::endl;
+                    countWordsAndSave(wordCounter,libro,charactersToInclude);
+                    std::cout << "Cuenta terminada." <<std::endl;
+                }
+            }else{
+                std::cout<< "El archivo ya existe..."<<std::endl;
+                }
             break;
         case 8:
+            canIndex = executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
+            break;
+        case 9:
             if (canIndex == 1){
                 executeInvertedIndex(getenv("PATH_FILES_OUT"), getenv("INVERTED_INDEX_FILE"));
             }else{
