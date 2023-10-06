@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <unistd.h>
 
+//Funcion que busca archivos en "PATH_FILES_OUT" y agrega su nombre a un vector "fileNames"
 std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_OUT) {
     std::vector<std::string> fileNames;
     try {
@@ -24,7 +25,7 @@ std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_OUT) {
     return fileNames;
 }
 
-// Define a struct to hold information about word occurrences in a file
+
 struct WordOccurrence {
     std::string fileName;
     int count;
@@ -34,10 +35,9 @@ struct WordOccurrence {
 void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const std::string& outputPath, const std::string& PATH_FILES_OUT) {
     std::unordered_map<std::string, std::vector<WordOccurrence>> wordOccurrences; // Map to store word occurrences
 
-    // Iterate over the pre-parsed files
+    //mapeo de palabras en todos los archivos del vector
     for (const std::string& fileName : fileNames) {
         std::ifstream inputFile(PATH_FILES_OUT + fileName);
-        // Read word occurrences from the file
         std::string word;
         int count;
         while (inputFile >> word >> count) {
@@ -47,17 +47,16 @@ void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const
         inputFile.close();
     }
 
-    // Open the output file for writing
     std::ofstream outputFile(outputPath);
 
     if (!outputFile.is_open()) {
         std::cerr << "Error: Failed to open the output file." << std::endl;
     return;
-}
+    }
     pid_t pid = getpid();
     std::cout <<"El proceso pid: " << pid << " Palabras procesadas: " << wordOccurrences.size() << " En el archivo: " << outputPath << std::endl;
 
-    // Iterate over the wordOccurrences map and write results to the output file
+    // Lectura del map, y escritura en outputhfile
     for (const auto& entry : wordOccurrences) {
         const std::string& word = entry.first;
         const std::vector<WordOccurrence>& occurrences = entry.second;
@@ -69,7 +68,6 @@ void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const
         outputFile << std::endl;
     }
 
-    // Close the output file
     outputFile.close();
 }
 
