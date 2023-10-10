@@ -67,7 +67,7 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             if (canIndex == 1){
                 executeInvertedIndex(getenv("PATH_FILES_OUT"), getenv("INVERTED_INDEX_FILE"));
             }else{
-                std::cout << "maaal anda roando en el cielo" <<std::endl;
+                std::cout << "Error. No se han preparado los archivos para al indice" <<std::endl;
             }
             break;
         // Add more cases for other numbers

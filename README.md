@@ -8,14 +8,14 @@ Esta aplicacion se desarrollo en un ambiente Linux, y todas las dependencias de 
 
 ## Comando para compilar
 
-Para compilar en Linux, abrir una terminal y ubicarse en la carpeta donde se encuentra el programa, luego en la terminal debe ejecutar los siguientes comandos 
+Para compilar en linux, abrir una terminal y ubicarse en la carpeta donde se encuentran los archivos makeAll.sh y cleanAll.sh, luego en la terminal ejecutar los siguientes comandos
 
 ```
-make
-make -f Makefile_wordCounter
-make -f Makefile_invertedIndex
+chmod +x makeAll.sh
+chmod +x cleanAll.sh
+
 ```
- Despues de ejecutar los comandos ***make*** y ***make -f Makefile_wordCounter*** se crearan los ejecutables, ***myprogram***, ***wordCounter*** e ***invertedIndex***
+Para compilar el programa, debe ejecutar el programa ***makeAll.sh***. Para borrar los ejecutables creados, ejecutar el programa ***cleanAll.sh***.
 
 ## Comando para ejecutar
 

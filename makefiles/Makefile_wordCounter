@@ -5,10 +5,10 @@ CC = g++
 CFLAGS = -std=c++17 -Wall
 
 # Target executable name
-TARGET = wordCounter
+TARGET = ../wordCounter
 
 # Source files
-SRC = wordCounter.cpp
+SRC = ../src/wordCounter.cpp
 
 # Default target
 all: $(TARGET)

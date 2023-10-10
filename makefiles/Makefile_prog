@@ -5,13 +5,13 @@ CC = g++
 CFLAGS = -std=c++17 -Wall
 
 # Target executable name
-TARGET = myprogram
+TARGET = ../myprogram
 
 # Source files
-SRC = prog.cpp funcionesCPP/funciones.cpp funcionesCPP/reader.cpp funcionesCPP/casos.cpp
+SRC = ../src/prog.cpp ../funcionesCPP/funciones.cpp ../funcionesCPP/reader.cpp ../funcionesCPP/casos.cpp
 
 # Header files
-HEADERS = funcionesH/funciones.h funcionesH/reader.h funcionesH/casos.h
+HEADERS = ../funcionesH/funciones.h ../funcionesH/reader.h ../funcionesH/casos.h
 
 # Default target
 all: $(TARGET)

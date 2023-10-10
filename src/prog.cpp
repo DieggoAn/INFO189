@@ -1,6 +1,6 @@
-#include "funcionesH/funciones.h"
-#include "funcionesH/reader.h"
-#include "funcionesH/casos.h"
+#include "../funcionesH/funciones.h"
+#include "../funcionesH/reader.h"
+#include "../funcionesH/casos.h"
 #include <getopt.h>
 #include <iostream>
 #include <cstdlib>
