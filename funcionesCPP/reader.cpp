@@ -1,17 +1,41 @@
 #include "../funcionesH/reader.h"
 
-bool fileReader(const std::string& filename, const std::string& keyword) {
+void loadEnvFromFile(const std::string& envFilePath) {
+    std::ifstream file(envFilePath);
+    std::string line;
 
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            // Check if the line contains an environment variable assignment
+            size_t equalsPos = line.find('=');
+            if (equalsPos != std::string::npos) {
+                std::string varName = line.substr(0, equalsPos);
+                std::string varValue = line.substr(equalsPos + 1);
+                
+                // Set the environment variable in the current process
+                setenv(varName.c_str(), varValue.c_str(), 1);
+            }
+        }
+        file.close();
+    } else {
+        std::cerr << "Unable to open .env file: " << envFilePath << std::endl;
+    }
+}
+
+bool fileReader(const std::string& filename, const std::string& keyword) {
+    // Open the file
     std::ifstream inputFile(filename);
+
     // Check if the file is open
     if (!inputFile.is_open()) {
-        std::cerr << "No se pudo abrir el archivo." << std::endl;
+        std::cerr << "Failed to open the file." << std::endl;
         return false;
     }
     std::string line;
      while (std::getline(inputFile, line, ',')) {
         std::istringstream ss(line);
         std::string name;
+
         // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.')) {
             if (name == keyword) {
@@ -21,13 +45,14 @@ bool fileReader(const std::string& filename, const std::string& keyword) {
         }
     }
 
+    // Close the file
     inputFile.close();
-    std::cout << "No se encontro el nombre en la base de datos." << std::endl;
+    std::cout << "Cannot find name in database" << std::endl;
     return false;
-};
+    };
     
 std::string getName(const std::string& filename, const std::string& keyword){
-
+// Open the file
     std::ifstream inputFile(filename);
     std::string line;
     
@@ -35,20 +60,23 @@ std::string getName(const std::string& filename, const std::string& keyword){
         std::istringstream ss(line);
         std::string name;
 
+        // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.')) {
             if (name == keyword) {
                 inputFile.close();
                 return keyword;
-                }
+            }
             }
         }
         inputFile.close();
-        std::cout << "No se pudo encontrar el nombrse en la base de datos " << std::endl;
+        std::cout << "No se pudo encontrar el nombree en la base de datos " << std::endl;
         return 0;
+
+
 }
 
 std::string getAccessLevel(const std::string& filename, const std::string& keyword){
-
+    // Open the file
     std::ifstream inputFile(filename);
     std::string line;
     
@@ -57,6 +85,7 @@ std::string getAccessLevel(const std::string& filename, const std::string& keywo
         std::string name;
         std::string accessLevel;
 
+        // Split the line using dot as a delimiter
         if (std::getline(ss, name, '.') && (ss >> accessLevel)) {
             if (name == keyword) {
                 inputFile.close();
@@ -67,6 +96,7 @@ std::string getAccessLevel(const std::string& filename, const std::string& keywo
         inputFile.close();
         std::cout << "No se pudo encontrar el nombre en la base de datos " << std::endl;
         return "";
+
 }
 
 int deployMenu(const std::string& filename, const std::string& name, const std::string& accessLevel) {
@@ -95,33 +125,24 @@ int deployMenu(const std::string& filename, const std::string& name, const std::
     return 0;
 }
 
-bool createNewTxtFile(const std::string& filePath) {
-    // Extract the directory path from the file path
-    std::string directory = filePath.substr(0, filePath.find_last_of("/\\"));
+void createNewTxtFile(const std::string& filename) {
 
-    // Create the directory if it doesn't exist
-    if (!std::filesystem::exists(directory)) {
-        if (!std::filesystem::create_directories(directory)) {
-            std::cerr << "Error creating directory: " << directory << std::endl;
-            return false;
-        }
-    }
 
-    // Create and open the file
-    std::ofstream file(filePath);
-    if (!file.is_open()) {
-        std::cerr << "Error creating file: " << filePath << std::endl;
-        return false;
-    }
-
-    file.close();
-    return true;
+    // Construct the full path to the new file
+    std::string filePath = "newFiles/" + filename + ".txt";
+    // Create and open the new file
+    std::ofstream outputFile(filePath);
+    if (outputFile.is_open()) {
+        // File created successfully
+    } 
 }
 
-
 bool searchFileInNewFiles(const std::string& filename) {
+    // Construct the full path to the file in the "newFiles" folder
+    std::string filePath = "newFiles/" + filename + ".txt";
+
     // Check if the file exists
-    if (std::filesystem::exists(filename)) {
+    if (std::filesystem::exists(filePath)) {
         return true;
     } else {
         return false;
@@ -130,7 +151,7 @@ bool searchFileInNewFiles(const std::string& filename) {
 
 void appendToFile(const std::string& filename, const std::string& content) {
     std::ofstream outputFile;
-    std::string fullPath =  filename;
+    std::string fullPath =  "newFiles/" + filename + ".txt";
     outputFile.open(fullPath, std::ios::app); // Open the file in append mode
 
     if (outputFile.is_open()) {
@@ -158,11 +179,11 @@ std::string findPath(const std::string& filename, const std::string& keyword) {
             }
         }
     }
+
     // Return an empty string if the keyword was not found in the file
     return "";
 }
 
-// Function to check if a character should be included
 bool shouldInclude(char c, const std::string& charactersToInclude) {
     // Check if the character is in the list of characters to include
     for (char includeChar : charactersToInclude) {

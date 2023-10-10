@@ -1,2 +1,0 @@
-DB_PATH=Dependencias/db.txt
-MENU_PATH=Dependencias/menu.txt

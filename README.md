@@ -2,14 +2,20 @@
 
 ## Explicacion de la aplicacion 
 
-Esta es una aplicacion en **c++**, que recibe un nombre y un vector de cualquier largo, tambien se puede crear un archivo de texto, escribir sobre este mismo y subir un documento en formato .txt y contar cuantas veces se repite una palabra, para esto debe incluirse al ejecutar el programa el nombre del archivo, el contenido de este, la ruta del archivo de texto y el nombre del nuevo archivo que va a contener el conteo de palabras.
+Esta es una aplicacion en **c++**, que recibe un nombre y un vector de cualquier largo, tambien se puede crear un archivo de texto y escribir sobre este mismo, para esto debe incluirse al ejecutar el programa el nombre del archivo y el contenido de este. 
 Al ejecutarse esta aplicacion, se desplegara en la consola una lista de comandos la cual le permitira al usuario escoger que operacion quiere realizar en el vector que este proporciono, al escribir el numero que representa la operacion que se quiere realizar, se presiona Enter y el programa ejecutara la funcion correspondiente.
 Esta aplicacion se desarrollo en un ambiente Linux, y todas las dependencias de este programa se encuentra en la misma carpeta.
 
 ## Comando para compilar
 
-Para compilar en Linux, solo debe abrir una terminal y ubicarse en la carpeta donde se encuentra el programa, luego en la terminal debe escribir ***make*** para compilar, si se quiere modificar el codigo, debe hacer ***make clean*** para eliminar el programa actual, luego hacer ***make*** para crearlo con los nuevos cambios.
-Al compilarlo con ***make*** se crea un ejecutable llamado ***myprogram***
+Para compilar en Linux, abrir una terminal y ubicarse en la carpeta donde se encuentra el programa, luego en la terminal debe ejecutar los siguientes comandos 
+
+```
+make
+make -f Makefile_wordCounter
+make -f Makefile_invertedIndex
+```
+ Despues de ejecutar los comandos ***make*** y ***make -f Makefile_wordCounter*** se crearan los ejecutables, ***myprogram***, ***wordCounter*** e ***invertedIndex***
 
 ## Comando para ejecutar
 
@@ -20,8 +26,8 @@ Para ejecutar el programa primero hay que compilarlo, luego de que se haya compi
 -v <Vector de numeros enteros>
 -f <Nombre del archivo que quiere crear o seleccionar>
 -t <Contenido del texto que quiere agregar al archivo seleccionado>
--i <Direccion donde se encuentra el archivo de texto>
--o <Direccion donde se quiere crear el archivo de conteo de palabras y el nombre de este archivo>
+-i <Direccion del libro al cual le quiere contar las palabras>
+-o <Direccion donde se quiere guardar el conteo de palabras>
 ```
 Para ingresar un vector este debe esta encerrado en comillas " " y cada numero debe ir separado por un punto y coma ;
 
@@ -33,7 +39,7 @@ Para ingresar un vector este debe esta encerrado en comillas " " y cada numero d
 Una entrada completa para iniciar el programa se ve de esta forma :
 
 ```
-./myprogram -n Diego -v "1;2;3;4;5;6" -f Carpeta/Test -f "Hello World" -i "Dependencias/lotr.txt" -o "Dependencias/conteo"
+./myprogram -n Diego -v "1;2;3;4;5;6" -f Test -f "Hello World" -i Dependencias/lotr.txt -o Dependencias/conteo.txt
 ```
 
 ## Explicacion base de datos
@@ -56,19 +62,8 @@ Donde **0** es el Numero identificador de la funcion, **Salir** es el nombre de 
 
 ## Nivel de acceso
 
-El nivel de acceso de un usuario refleja la cantidad de funciones a las cual este usuario tiene permisos para utilizar, en el archivo ***menu.txt*** a la derecha de cada funcion estan nombrados los tipos de usuario con acceso a la funcion. Estos son los permisos que tiene cada nivel de usuario.
+El nivel de acceso de un usuario refleja la cantidad de funciones a las cual este usuario tiene permisos para utilizar, en el archivo ***menu.txt*** a la derecha de cada funcion estan nombrados los tipos de usuario con acceso a la funcion. Estos son los permisos que tiene cada nivel de usuario:
 
-### Admin
-```
-0) Salir. 
-1) Realizar sumatoria del vector. 
-2) Realizar promedio del vector. 
-3) Realizar moda del vector. 
-4) Contar elementos del vector. 
-5) Crear Archivo. 
-6) Agregar texto a archivo. 
-7) Contar palabras. 
-```
 ### userGeneral
 ```
 0) Salir. 

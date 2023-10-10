@@ -1,0 +1,25 @@
+# Compiler
+CC = g++
+
+# Compiler flags
+CFLAGS = -std=c++17 -Wall
+
+# Target executable name for the smaller program
+TARGET = invertedIndex
+
+# Source files for the smaller program
+SRC = invertedIndex.cpp  # Add more source files if needed
+
+# Header files for the smaller program
+HEADERS =  # Add your header files if needed
+
+.PHONY: all clean
+
+# Default target
+all: $(TARGET)
+
+$(TARGET): $(SRC) $(HEADERS)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+
+clean:
+	rm -f $(TARGET)
