@@ -47,6 +47,16 @@ void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const
         inputFile.close();
     }
 
+    std::ifstream fileCheck(outputPath);
+    if (!fileCheck) {
+        // File doesn't exist, create it
+        std::ofstream fileCreate(outputPath);
+        if (fileCreate) {
+            std::cout << "Se creo el archivo de Indice invertido" << std::endl;
+        } else {
+            std::cerr << "Error creando el archivo de indice invertido." << std::endl;
+        }
+    }
     std::ofstream outputFile(outputPath);
 
     if (!outputFile.is_open()) {
@@ -63,7 +73,7 @@ void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const
 
         outputFile << word << "";
         for (const WordOccurrence& occurrence : occurrences) {
-            outputFile << "(" << occurrence.fileName << "," << occurrence.count << ");";
+            outputFile << "(" << occurrence.fileName << ":" << occurrence.count << ");";
         }
         outputFile << std::endl;
     }
@@ -76,7 +86,6 @@ int main(int argc, char* argv[]) {
     std::string indexFile = argv[2];
     std::string pathOut = argv[1];
     std::vector<std::string> fileNames = getFilesInFolder(pathOut);
-    std::cout <<"holaaa"<<std::endl;
     consolidateWordOccurrences(fileNames,indexFile, pathOut);
 
     return 0;

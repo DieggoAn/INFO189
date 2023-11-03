@@ -18,8 +18,11 @@ int calculateVectorLength(const std::vector<int>& vec);
 
 void cerrarPrograma();
 
-bool executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4);
+bool executeWordCounter(const std::string& param1, const std::string& param2, const std::string& param3, const std::string& param4, const std::string& param5);
 
-void executeInvertedIndex(const std::string& param1, const std::string& param2);
+void executeInvertedIndex(const std::string& param1, const std::string& param2, const std::string& param3);
+
+void executeLlamarBuscador(const std::string& param1,const std::string& param2,const std::string& param3);
+
 
 #endif // FUNCIONES_H

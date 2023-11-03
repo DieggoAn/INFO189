@@ -12,6 +12,9 @@ make -f Makefile_invertedIndex
 # Build the third program in the background
 make -f Makefile_wordCounter
 
+# Build the forth program in the background
+make -f Makefile_llamarBuscador
+
 # Wait for all background jobs to finish
 wait
 

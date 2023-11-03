@@ -13,14 +13,16 @@
 
 std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_IN, std::string& extension) {
     std::vector<std::string> fileNames;
-    std::cout << PATH_FILES_IN << std::endl;
     try {
         // Iterate over the entries in the folder
         for (const auto& entry : std::filesystem::directory_iterator(PATH_FILES_IN)) {
             std::string fileName = entry.path().filename().string();
             std::string fileExtension = fileName.substr(fileName.length() - 3);
             if (entry.is_regular_file() && fileExtension == extension) {
-                fileNames.push_back(fileName);
+                std::uintmax_t fileSize = std::filesystem::file_size(entry);
+                if (fileSize > 1048576) {  // Check for files larger than 1MB (1,048,576 bytes)
+                    fileNames.push_back(fileName);
+                }
             }
         }
     } catch (const std::filesystem::filesystem_error& e) {
@@ -29,6 +31,7 @@ std::vector<std::string> getFilesInFolder(std::string& PATH_FILES_IN, std::strin
 
     return fileNames;
 }
+
 
 
 bool shouldInclude(char c, const std::string& charactersToInclude) {
@@ -107,15 +110,19 @@ void countWordsAndSaveWrapper(const std::string& pathOut, const std::string& pat
 
 
 int main(int argc, char* argv[]) {
-
     std::string extension = argv[1];
     std::string pathIn = argv[2];
     std::string pathOut = argv[3];
     std::string maxThreads = argv[4];
 
-    std::cout << extension << " " << pathIn << " " << pathOut << " " << maxThreads << std::endl;
     std::vector<std::string> files = getFilesInFolder(pathIn, extension);
     std::string charactersToInclude = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZáéíóúüÁÉÍÓÚñ";
+
+    if (files.size()<20){
+        std::cout<<"Se necesitan de 20 o mas archivos para analizar" <<std::endl;
+        return 1;
+    }
+
 
     if (!files.empty()) {
 

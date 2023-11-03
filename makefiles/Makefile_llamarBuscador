@@ -1,0 +1,20 @@
+# Compiler
+CC = g++
+
+# Compiler flags
+CFLAGS = -std=c++17 -Wall
+
+# Target executable name
+TARGET = ../llamarBuscador
+
+# Source files
+SRC = ../src/llamarBuscador.cpp
+
+# Default target
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+
+clean:
+	rm -f $(TARGET)

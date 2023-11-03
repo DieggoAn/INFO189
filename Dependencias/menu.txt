@@ -8,4 +8,5 @@
 7) Contar palabras. <admin>
 8) Preparar datos para indice invertido. <admin>
 9) Crear indice invertido. <admin>
-10) Indefinido. 
+10) Llamar buscador. <admin>
+11) Indefinido. 

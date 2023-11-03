@@ -61,14 +61,17 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
                 }
             break;
         case 8:
-            canIndex = executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"));
+            canIndex = executeWordCounter(getenv("EXTENSION"), getenv("PATH_FILES_IN"), getenv("PATH_FILES_OUT"), getenv("AMOUNT_THREADS"),getenv("WORD_COUNTER_APP"));
             break;
         case 9:
             if (canIndex == 1){
-                executeInvertedIndex(getenv("PATH_FILES_OUT"), getenv("INVERTED_INDEX_FILE"));
+                executeInvertedIndex(getenv("PATH_FILES_OUT"), getenv("INVERTED_INDEX_FILE"),getenv("INVERTED_INDEX_APP"));
             }else{
                 std::cout << "Error. No se han preparado los archivos para al indice" <<std::endl;
             }
+            break;
+        case 10:
+            executeLlamarBuscador(getenv("INVERTED_INDEX_FILE"),getenv("TOPK"),getenv("LLAMAR_BUSCADOR_APP"));
             break;
         // Add more cases for other numbers
         default:
