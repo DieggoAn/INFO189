@@ -7,65 +7,116 @@
 #include <unistd.h>
 #include <cctype>
 #include <unordered_map>
+#include <algorithm>
 
-std::map<std::string, std::vector<std::string>> mapLinesFromFile(const std::string& indexFile) {
-    std::map<std::string, std::vector<std::string>> lineMap;
+struct FileData {
+    std::string filename;
+    int recurrence;
+};
 
-    // Open the input file
-    std::ifstream inFile(indexFile);
-    if (!inFile) {
-        std::cerr << "Error opening the input file." << std::endl;
-        return lineMap;  // Return an empty map in case of an error
+// Define a function to read the file and populate the map.
+std::map<std::string, std::vector<FileData>> readIndexFile(const std::string& filename) {
+    std::map<std::string, std::vector<FileData>> dataMap;
+    std::ifstream file(filename);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to open the file: " << filename << std::endl;
+        return dataMap; // Return an empty map in case of an error.
     }
 
-    // Read and store each line in the map
     std::string line;
-    while (std::getline(inFile, line)) {
-        // Parse the line and separate it into word and data
-        size_t pos = line.find(',');
-        if (pos != std::string::npos) {
-            std::string word = line.substr(0, pos);
-            std::string data = line.substr(pos + 1);
+    while (std::getline(file, line)) {
+        // Split the line into key and data parts.
+        size_t commaPos = line.find(',');
+        if (commaPos != std::string::npos) {
+            std::string key = line.substr(0, commaPos);
+            std::string data = line.substr(commaPos + 1);
 
-            // Add the line to the map
-            lineMap[word].push_back(data);
+            // Split the data into individual filename-recurrence pairs.
+            size_t semicolonPos = data.find(';');
+            while (semicolonPos != std::string::npos) {
+                std::string pair = data.substr(0, semicolonPos);
+                size_t colonPos = pair.find(':');
+                if (colonPos != std::string::npos) {
+                    std::string filename = pair.substr(0, colonPos);
+                    int recurrence = std::stoi(pair.substr(colonPos + 1));
+
+                    // Add the data to the map.
+                    dataMap[key].push_back({filename, recurrence});
+                }
+                data = data.substr(semicolonPos + 1);
+                semicolonPos = data.find(';');
+            }
         }
     }
 
-    // Close the input file
-    inFile.close();
-
-    return lineMap;
+    file.close();
+    return dataMap;
 }
+void printFileDataForMultipleKeys(const std::map<std::string, std::vector<FileData>>& dataMap, const std::string& keys) {
+    // Split the keys into individual words.
+    std::istringstream keyStream(keys);
+    std::vector<std::string> keyList;
+    std::string key;
+    std::cout << keys << std::endl;
+    while (std::getline(keyStream, key, ' ')) {
+        keyList.push_back(key);
+    }
 
-std::vector<std::string> searchWordsInMap(const std::map<std::string, std::vector<std::string>>& lineMap, const std::string& searchInput) {
-    std::istringstream iss(searchInput);
-    std::vector<std::string> searchWords;
+    // Create a map to store aggregated recurrence counts for filenames.
+    std::map<std::string, int> aggregateRecurrence;
 
-    // Divide la entrada en palabras individuales
-    std::string word;
-    while (iss >> word) {
-        auto it = lineMap.find(word);
-        if (it != lineMap.end()) {
-            const std::vector<std::string>& data = it->second;
-            searchWords.insert(searchWords.end(), data.begin(), data.end());
+    // Iterate through the keys and update the aggregateRecurrence map.
+    for (const std::string& key : keyList) {
+        auto it = dataMap.find(key);
+        if (it != dataMap.end()) {
+            for (const FileData& fileData : it->second) {
+                // Add or update the aggregated recurrence count for the filename.
+                aggregateRecurrence[fileData.filename] += fileData.recurrence;
+            }
         }
     }
 
-    return searchWords;
-}
+    // Determine the total number of keys in the search query.
+    int totalKeys = keyList.size();
 
-int countWords(const std::string& input) {
-    std::istringstream iss(input);
-    std::vector<std::string> words;
-    std::string word;
+    // Create a map to store the count of matched keys for each filename.
+    std::map<std::string, int> matchedKeysCount;
 
-    while (iss >> word) {
-        words.push_back(word);
+    // Initialize the count of matched keys for all filenames to zero.
+    for (const auto& entry : dataMap) {
+        for (const FileData& fileData : entry.second) {
+            matchedKeysCount[fileData.filename] = 0;
+        }
     }
 
-    return words.size();
+    // Update the count of matched keys for filenames.
+    for (const std::string& key : keyList) {
+        auto it = dataMap.find(key);
+        if (it != dataMap.end()) {
+            for (const FileData& fileData : it->second) {
+                matchedKeysCount[fileData.filename]++;
+            }
+        }
+    }
+    std::vector<std::pair<std::string, int>> sortedRecurrence(aggregateRecurrence.begin(), aggregateRecurrence.end());
+
+    // Sort the vector in descending order based on values (recurrence counts).
+    std::sort(sortedRecurrence.begin(), sortedRecurrence.end(),
+            [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+                return a.second > b.second;
+            });
+    for (const auto& entry : sortedRecurrence) {
+        const std::string& filename = entry.first;
+        int recurrence = entry.second;
+        int matchedCount = matchedKeysCount[filename];
+
+        if (matchedCount == totalKeys) {
+            std::cout << "Filename: " << filename << ", Recurrence: " << recurrence << std::endl;
+        }
+    }
 }
+
 
 int main(int argc, char* argv[]) {
     // Define a map to store each line from the input file
@@ -74,7 +125,7 @@ int main(int argc, char* argv[]) {
     char seguir = 's';
     while (seguir == 's' ){
 
-            std::map<std::string, std::vector<std::string>> lineMap = mapLinesFromFile(indexFile);
+            std::map<std::string, std::vector<FileData>> dataMap = readIndexFile(indexFile);
             std::string userInput = "";
             pid_t pid = getpid();
 
@@ -82,16 +133,10 @@ int main(int argc, char* argv[]) {
             std::cout << "Los top K documentos serán =: "<< TOPK <<std::endl;
             std::cout << "Escriba texto a buscar: ";
             std::getline(std::cin, userInput);
-            int numWords = countWords(userInput);
-
-            std::cout << "Respuesta: ";
-            std::vector<std::string> filteredResult = searchWordsInMap(lineMap, userInput); 
+            std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower); 
+            std::cout << "Respuesta: ";          
             // Imprime los resultados
-
-            for (const std::string& item : filteredResult) {
-                std::cout << item << std::endl;
-            }
-
+            printFileDataForMultipleKeys(dataMap, userInput);  
             std::cout << std::endl;
             std::cout<<std::endl;
 

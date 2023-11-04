@@ -73,7 +73,7 @@ void consolidateWordOccurrences(const std::vector<std::string>& fileNames, const
 
         outputFile << word << "";
         for (const WordOccurrence& occurrence : occurrences) {
-            outputFile << "(" << occurrence.fileName << ":" << occurrence.count << ");";
+            outputFile << "" << occurrence.fileName << ":" << occurrence.count << ";";
         }
         outputFile << std::endl;
     }
