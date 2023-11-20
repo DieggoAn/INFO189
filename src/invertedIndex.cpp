@@ -76,7 +76,6 @@ int main(int argc, char* argv[]) {
     std::string indexFile = argv[2];
     std::string pathOut = argv[1];
     std::vector<std::string> fileNames = getFilesInFolder(pathOut);
-    std::cout <<"holaaa"<<std::endl;
     consolidateWordOccurrences(fileNames,indexFile, pathOut);
 
     return 0;

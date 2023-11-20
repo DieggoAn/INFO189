@@ -64,3 +64,9 @@ void executeInvertedIndex(const std::string& param1, const std::string& param2){
     std::string command = "./invertedIndex " + param1 + " " + param2;
     int exitCode = std::system(command.c_str());
 }
+
+int executeGraph (){
+    std::string command = "./plotGraph";
+    int exitCode = std::system(command.c_str());
+    return exitCode;
+}

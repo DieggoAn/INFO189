@@ -22,4 +22,6 @@ bool executeWordCounter(const std::string& param1, const std::string& param2, co
 
 void executeInvertedIndex(const std::string& param1, const std::string& param2);
 
+int executeGraph ();
+
 #endif // FUNCIONES_H

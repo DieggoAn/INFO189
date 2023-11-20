@@ -9,3 +9,4 @@
 8) Preparar datos para indice invertido. <admin>
 9) Crear indice invertido. <admin>
 10) Indefinido. 
+11) Graficar coordenadas <admin>

@@ -70,6 +70,13 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
                 std::cout << "Error. No se han preparado los archivos para al indice" <<std::endl;
             }
             break;
+        case 11:
+            if (executeGraph()==0){
+                break;
+            }else{
+                std::cout << "Error al graficar los puntos.";
+                break;
+            }
         // Add more cases for other numbers
         default:
             std::cout << "la opcion "<< option << " aun no ha sido implementada" << std::endl;
