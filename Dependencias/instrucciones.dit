@@ -4,17 +4,15 @@
     {
     "tipo": "directorio",
     "nombre": "dir1",
-    "objetos"[
-        {"tipo": "archivo", "nombre": "file1", "contenido": "la la la", "permisos": ["escritura","lectura"]},
-        {"tipo": "archivo", "nombre": "file2", "contenido": "le le le", "permisos": ["escritura"]},
-        {"tipo": "archivo", "nombre": "file3", "contenido": "li li li", "permisos": ["lectura"]},
-        {"tipo": "archivo", "nombre": "file4", "contenido": "lo lo lo", "permisos": ["escritura","lectura"]},
-        {"tipo": "archivo", "nombre": "file5", "contenido": "lu lu lu", "permisos": ["lectura"]},
+    "objetos":[
+        {"tipo": "archivo", "nombre": "file1.txt", "contenido": "la la la", "permisos": ["escritura","lectura"]},
+        {"tipo": "archivo", "nombre": "file2.txt", "contenido": "le le le", "permisos": ["escritura"]},
+        {"tipo": "archivo", "nombre": "file3.txt", "contenido": "li li li", "permisos": ["lectura"]},
+        {"tipo": "archivo", "nombre": "file4.txt", "contenido": "lo lo lo", "permisos": ["escritura","lectura"]},
+        {"tipo": "archivo", "nombre": "file5.txt", "contenido": "lu lu lu", "permisos": ["lectura"]},
         {
-        "tipo": "directorio",
-        "nombre": "dir1.1,
-        "objetos": [
-            {"tipo": "archivo", "nombre": "file6", "contenido": "4 ccc", "permisos":["escritura"]}
+        "tipo": "directorio","nombre": "dir1.1","objetos":[
+            {"tipo": "archivo", "nombre": "file6.txt", "contenido": "4 ccc", "permisos":["escritura"]}
         ]
         }
     ]

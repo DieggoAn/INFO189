@@ -28,6 +28,9 @@ HEADERS3 =  # Add your header files if needed
 HEADERS4 =  # Add your header files if needed
 HEADERS5 =  # Add your header files if needed
 
+# Include directories
+INCLUDE_DIRS = -IDependencias # Adjust the path based on your project structure
+
 .PHONY: all clean
 
 # Default target
@@ -43,7 +46,7 @@ $(TARGET3): $(SRC3) $(HEADERS3)
 	$(CC) $(CFLAGS) $(SRC3) -o $(TARGET3)
 
 $(TARGET4): $(SRC4) $(HEADERS4)
-	$(CC) $(CFLAGS) $(SRC4) -o $(TARGET4)
+	$(CC) $(CFLAGS) $(INCLUDE_DIRS) $(SRC4) -o $(TARGET4)
 
 $(TARGET5): $(SRC5) $(HEADERS5)
 	$(CC) $(CFLAGS) $(SRC5) -o $(TARGET5)

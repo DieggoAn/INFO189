@@ -108,9 +108,9 @@ int main()
 
         window.clear(sf::Color(30, 30, 30));
 
-        //set1.SetDataValue(0, set1.GetDataValue(0) + sf::Vector2f(0, 0.001));
+        //set1.SetDataValue(0, set1.GetDataValue(0) + sf::Vector2f(0, 0.011));
 
-        //Calling without parameters makes the Plot auto-deduce the size of the plot
+        //Calling withouts parameters makes the Plot auto-deduce the size of the plot
 
         window.draw(plot);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
