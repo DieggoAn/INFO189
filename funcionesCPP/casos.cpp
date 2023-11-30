@@ -4,6 +4,7 @@
 
 
 bool canIndex = false;
+int foldSuccess = 0;
 
 
 void caseManager(int option, const std::string& name, const std::vector<int>& vec,const std::string& fileName,const std::string& text, const std::string& libro, const std::string& wordCounter){
@@ -69,6 +70,9 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             }else{
                 std::cout << "Error. No se han preparado los archivos para al indice" <<std::endl;
             }
+            break;
+        case 10:
+            foldSuccess = executeFoldTrees();
             break;
         case 11:
             if (executeGraph()==0){

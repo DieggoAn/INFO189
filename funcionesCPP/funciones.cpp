@@ -70,3 +70,9 @@ int executeGraph (){
     int exitCode = std::system(command.c_str());
     return exitCode;
 }
+
+int executeFoldTrees (){
+    std::string command = "./foldTrees blank";
+    int exitCode = std::system(command.c_str());
+    return exitCode;
+}

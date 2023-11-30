@@ -88,29 +88,28 @@ void createObjects(const json& objects, const std::string& baseDir) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        std::cerr << "Modo de uso: " << argv[0] << " <filename.dit>" << std::endl;
-        return 1;
-    } else {
-        int isDit = checkFileExtension(argv[1]);
-        if (isDit != 0) {
-            std::cerr << "Debe ingresar un archivo con formato *.dit" << std::endl;
-            return 1;
-        }
+
+    std::string treeFile;
+    std::cout <<"Ingrese direccion de archivo .dit: ";
+    std::cin >> treeFile;
+    int isDit = checkFileExtension(treeFile);
+    while (isDit != 0){
+        std::cout <<"Ingrese direccion de archivo .dit: ";
+        std::cin >> treeFile;
+        isDit = checkFileExtension(treeFile);
     }
-    std::cout<<"holaa"<<std::endl;
-    std::ifstream file("Dependencias/instrucciones.dit");
+    std::ifstream file(treeFile);
     if (file.is_open()) {
         json data;
         file >> data;
         file.close();
-        std::cout<<"holaa"<<std::endl;
         std::string baseDir = data["dirbase"];
         createObjects(data["objetos"], baseDir);
+        std::cout << std::endl;
     } else {
         std::cerr << "Error opening structure.json" << std::endl;
     }
 
     return 0;
-    return 0;
+
 }

@@ -60,10 +60,10 @@ GraphData readGraphFile(const std::string& filePath) {
 int main()
 {
     std::string userInput = "";
-    std::cout << "Ingrese direccion del archivo .gra : "<<std::endl;
+    std::cout << "Ingrese direccion del archivo .gra : ";
     std::cin >> userInput;
     while (!isValidPath(userInput)){
-        std::cout << "Ingrese direccion del archivo .gra : "<<std::endl;
+        std::cout << std::endl << "Ingrese direccion del archivo .gra : ";
         std::cin >> userInput;
     }
     sf::ContextSettings settings;
