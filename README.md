@@ -8,15 +8,24 @@ Esta aplicacion se desarrollo en un ambiente Linux, y todas las dependencias de 
 
 ## Comando para compilar
 
-Para compilar en linux, abrir una terminal y ubicarse en la carpeta donde se encuentran los archivos makeAll.sh y cleanAll.sh, luego en la terminal ejecutar los siguientes comandos
+Para compilar en linux, usar make en terminal.
 
+## Lista de funciones
 ```
-chmod +x makeAll.sh
-chmod +x cleanAll.sh
-
+0) Salir.
+1) Realizar sumatoria del vector. (se debe usar -v al ejecutar)
+2) Realizar promedio del vector. (se debe usar -v al ejecutar)
+3) Realizar moda del vector. (se debe usar -v al ejecutar)
+4) Contar elementos del vector. (se debe usar -v al ejecutar)
+5) Crear Archivo. (se debe usar -f al ejecutar)
+6) Agregar texto a archivo. (se debe usar -t al ejecutar)
+7) Contar palabras. (se debe usar -i y -o al ejecutar)
+8) Preparar datos para indice invertido. (se requiere de una carpeta con archivos de texto como en Dependencias/FIN/)
+9) Crear indice invertido. 
+10) Crear sistema de directorio basado en arbol. (se requiere de un archivo .dir para su ejecucion)
+11) Crear sistema de directorio basado en lista circular. (se requiere de un archivo .dre para su ejecucion)
+12) Graficar coordenadas. (se requiere de un archivo .gra para su ejecucion)
 ```
-Para compilar el programa, debe ejecutar el programa ***makeAll.sh***. Para borrar los ejecutables creados, ejecutar el programa ***cleanAll.sh***.
-
 ## Comando para ejecutar
 
 Para ejecutar el programa primero hay que compilarlo, luego de que se haya compilado este programa se puede ejecutar desde el terminal ubicado en la carpeta que este se encuentra, para ingresar los parametros al programa debe escribir los flags correspondientes :
@@ -60,6 +69,18 @@ y cada funcion esta separada por un "\n", por ejemplo los datos de una funcion s
 ```
 Donde **0** es el Numero identificador de la funcion, **Salir** es el nombre de la funcion y los usuarios que pueden usar esta funcion son **admin,userGeneral,userRookie**
 
+## Variables de entorno
+
+El programa funciona con unas variables de entorno ya existentes en .env, en caso de que se quiera usar otro directorio o cambiar el numero de threads para las funciones de indice inverso, modificar directamente el archivo .env.
+```
+DB_PATH=Dependencias/db.txt
+MENU_PATH=Dependencias/menu.txt
+EXTENSION=txt
+PATH_FILES_IN=Dependencias/FIN/
+PATH_FILES_OUT=Dependencias/FOUT/
+AMOUNT_THREADS=4
+INVERTED_INDEX_FILE=Dependencias/file.txt
+```
 ## Nivel de acceso
 
 El nivel de acceso de un usuario refleja la cantidad de funciones a las cual este usuario tiene permisos para utilizar, en el archivo ***menu.txt*** a la derecha de cada funcion estan nombrados los tipos de usuario con acceso a la funcion. Estos son los permisos que tiene cada nivel de usuario:
