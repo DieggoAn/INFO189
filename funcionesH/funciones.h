@@ -26,4 +26,6 @@ int executeGraph ();
 
 int executeFoldTrees ();
 
+int executeCircularTrees();
+
 #endif // FUNCIONES_H

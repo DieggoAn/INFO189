@@ -4,7 +4,8 @@
 
 
 bool canIndex = false;
-int foldSuccess = 0;
+int foldSuccess = 0; 
+int circularSuccess = 0;
 
 
 void caseManager(int option, const std::string& name, const std::vector<int>& vec,const std::string& fileName,const std::string& text, const std::string& libro, const std::string& wordCounter){
@@ -75,6 +76,9 @@ void caseManager(int option, const std::string& name, const std::vector<int>& ve
             foldSuccess = executeFoldTrees();
             break;
         case 11:
+            circularSuccess = executeCircularTrees();
+            break;
+        case 12:
             if (executeGraph()==0){
                 break;
             }else{

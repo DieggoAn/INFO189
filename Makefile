@@ -13,7 +13,7 @@ TARGET2 = plotGraph
 TARGET3 = invertedIndex
 TARGET4 = foldTrees
 TARGET5 = wordCounter
-TARGET6 = listaCircularr
+TARGET6 = listaCircular
 
 # Source files
 SRC1 = src/prog.cpp funcionesCPP/funciones.cpp funcionesCPP/reader.cpp funcionesCPP/casos.cpp

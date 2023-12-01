@@ -92,11 +92,17 @@ int checkFileExtension(const string& filename) {
 }
 
 int main(){
-    int isDit = checkFileExtension("Dependencias/burnmy.dre");
-        if (isDit != 0)
-            cerr << "Debe ingresar un archivo con formato *.dre" << endl;
-        else
-            loadDreFromFile("Dependencias/burnmy.dre");
+
+    string circularFile;
+    cout <<"Ingrese direccion de archivo .dre: ";
+    cin >> circularFile;
+    int isDre = checkFileExtension(circularFile);
+    while (isDre != 0){
+        std::cout <<"Ingrese direccion de archivo .dire: ";
+        std::cin >> circularFile;
+        isDre = checkFileExtension(circularFile);
+    }
+    loadDreFromFile(circularFile);
     system("pause");
     return 0;
 }

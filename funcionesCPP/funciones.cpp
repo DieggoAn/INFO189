@@ -72,7 +72,13 @@ int executeGraph (){
 }
 
 int executeFoldTrees (){
-    std::string command = "./foldTrees blank";
+    std::string command = "./foldTrees";
+    int exitCode = std::system(command.c_str());
+    return exitCode;
+}
+
+int executeCircularTrees(){
+    std::string command = "./listaCircular";
     int exitCode = std::system(command.c_str());
     return exitCode;
 }
