@@ -6,17 +6,11 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <sys/stat.h>
 
 using namespace std;
 
 map<string, vector<string>> estructuraDirectorios;
-
-/*class archivo{
-    string tipo;
-    string nombre;
-    string contenido;
-    vector<string> permisos;
-};*/
 
 void loadDreFromFile(const string& dreFilePath) { //funcion para cargar variables de entorno
     ifstream file(dreFilePath);
@@ -24,6 +18,7 @@ void loadDreFromFile(const string& dreFilePath) { //funcion para cargar variable
     vector<string> directorios;
     bool correcto = true;
     bool flag1 = false, flag2 = false;
+
     if (file.is_open()) {
         while ((getline(file, line))&&(correcto)) {
             // Check if the line contains an environment variable assignment
@@ -76,8 +71,15 @@ void loadDreFromFile(const string& dreFilePath) { //funcion para cargar variable
             }
         }
         file.close();
-        if(correcto)
+        if(correcto){
             cout << ".dre opened successfully." << endl;
+            if (mkdir(dbase.c_str(), 0777) == 0) {
+                cout << "Folder created successfully." << endl;
+            }
+            else {
+                cerr << "Error: Folder could not be made." << endl;
+            }
+        }
         else
             cerr << ".dre file is in the wrong format." << endl;
     } else {
@@ -90,7 +92,6 @@ int checkFileExtension(const string& filename) {
 
     return (dotPosition != string::npos && filename.substr(dotPosition + 1) == "dre") ? 0 : 1;
 }
-
 int main(){
 
     string circularFile;
