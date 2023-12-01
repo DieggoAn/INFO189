@@ -2,7 +2,7 @@
 
 ## Explicacion de la aplicacion 
 
-Esta es una aplicacion en **c++**, que recibe un nombre y un vector de cualquier largo, tambien se puede crear un archivo de texto y escribir sobre este mismo, para esto debe incluirse al ejecutar el programa el nombre del archivo y el contenido de este. 
+Esta es una aplicacion en **c++**, que recibe un nombre y un vector de cualquier largo, ademas existen otras funciones que se explican en este documento.
 Al ejecutarse esta aplicacion, se desplegara en la consola una lista de comandos la cual le permitira al usuario escoger que operacion quiere realizar en el vector que este proporciono, al escribir el numero que representa la operacion que se quiere realizar, se presiona Enter y el programa ejecutara la funcion correspondiente.
 Esta aplicacion se desarrollo en un ambiente Linux, y todas las dependencias de este programa se encuentra en la misma carpeta.
 
